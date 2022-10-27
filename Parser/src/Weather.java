@@ -1,13 +1,17 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
-import javax.lang.model.util.Elements;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Weather {
     private String url;
     private Document document;
+    private Map<String, String> cities;
 
     public void printSummary(){
         System.out.println(getTemperature());
@@ -17,8 +21,14 @@ public class Weather {
         System.out.println(getHumidity());
     }
 
-    public Weather(String url) throws IOException {
-        this.url = url;
+    public Weather(String city) throws IOException {
+        this.cities = getCities();
+        if (cities.get(city) == null){
+            System.out.println("Город не найден");
+            return;
+        }
+
+        this.url = "https://www.gismeteo.ru" + cities.get(city) + "now/";
         try{
             this.document = Jsoup.connect(url).get();
         }
@@ -36,7 +46,9 @@ public class Weather {
             Element elementSign = elementTemp.selectFirst("span.sign");
             Element elementLower = elementTemp.selectFirst("span.lower");
 
-            return elementSign.ownText() + elementTemp.ownText() + elementLower.ownText();
+            String result = (elementLower != null) ? elementSign.ownText() + elementTemp.ownText() + elementLower.ownText() : elementSign.ownText() + elementTemp.ownText();
+
+            return result;
         }
         catch (Exception e){
             e.printStackTrace();
@@ -100,5 +112,24 @@ public class Weather {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public Map<String, String> getCities() throws IOException {
+        Map<String, String> citiesStruct = new HashMap<>();
+        try {
+            Document citiesDoc = Jsoup.connect("https://www.gismeteo.ru/catalog/russia/").get();
+
+            Elements cities = citiesDoc.select("body > section > div > section > section > div.popular-cities > div > div > div > a.link-item");
+
+            List<String> citiesKey = cities.eachText();
+            List<String> citiesValue = cities.eachAttr("href");
+
+            for (int i = 0; i < citiesKey.size(); i++) {
+                citiesStruct.put(citiesKey.get(i), citiesValue.get(i));
+            }
+            return citiesStruct;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
