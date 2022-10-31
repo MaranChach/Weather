@@ -5,12 +5,15 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class Weather {
     private String url;
+    private String urlWeekly;
     private Document document;
+    private Document documentWeekly;
     private Map<String, String> cities;
 
     public void printSummary(){
@@ -29,8 +32,10 @@ public class Weather {
         }
 
         this.url = "https://www.gismeteo.ru" + cities.get(city) + "now/";
+        this.urlWeekly = "https://www.gismeteo.ru" + cities.get(city) + "weekly/";
         try{
             this.document = Jsoup.connect(url).get();
+            this.documentWeekly = Jsoup.connect(urlWeekly).get();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -112,6 +117,30 @@ public class Weather {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public List getWeekly(){
+        List<WeatherSummary> weatherWeekly = new LinkedList<WeatherSummary>();
+        try {
+            Elements weatherBlock = documentWeekly.select("body > section > div > section > div.widget-weather > div.widget-columns-7 > div.widget-items");
+
+            Elements dateWeek = weatherBlock.select("div > a > div.day");
+            Elements date = weatherBlock.select("div > a > div.date");
+            Elements tmax = weatherBlock.select("div > div > div > div > div > div.maxt > span.unit_temperature_c");
+            Elements tmin = weatherBlock.select("div > div > div > div > div > div.mint > span.unit_temperature_c");
+            Elements clouds = weatherBlock.select("div > div > div.weather-icon");
+            Elements wind = weatherBlock.select("div.widget-row-wind-gust > div > span.unit_wind_m_s");
+
+
+            for (int i = 0; i < date.size(); i++) {
+                weatherWeekly.add(new WeatherSummary(date.get(i).text(), dateWeek.get(i).text(), tmax.get(i).text(), clouds.attr("data-text"), wind.get(i).text()));
+            }
+
+            return weatherWeekly;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return weatherWeekly;
     }
 
     public Map<String, String> getCities() throws IOException {

@@ -13,14 +13,18 @@ import org.jsoup.select.Elements;
 
     public class Main {
     public static void main(String[] args) throws IOException {
-        Weather weather = new Weather("Санкт-Петербург");
-        weather.printSummary();
-        /**Document a = Jsoup.connect("https://api.gismeteo.net/v2/search/cities/?lang=ru&query=%D0%BC%D0%BE%D1%81%D0%BA%D0%B2")
-                .method(Connection.Method.GET)
-                .data("X-Gismeteo-Token", "56b30cb255.3443075")
-                .get();**/
+        Weather weather = new Weather("Саратов");
+        List<WeatherSummary> weatherSummary = weather.getWeekly();
 
-
+        for (int i = 0; i < weatherSummary.size(); i++) {
+            WeatherSummary summary = weatherSummary.get(i);
+            System.out.println(summary.getDate());
+            System.out.println(summary.getDateWeek());
+            System.out.println(summary.getTemperature());
+            System.out.println(summary.getClouds());
+            System.out.println(summary.getWind() + " м/с");
+            System.out.println();
+        }
 
     }
 }
