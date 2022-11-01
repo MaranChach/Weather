@@ -13,10 +13,10 @@ import org.jsoup.select.Elements;
 
     public class Main {
     public static void main(String[] args) throws IOException {
-        Weather weather = new Weather("Саратов");
-        List<WeatherSummary> weatherSummary = weather.getWeekly();
+        Weather weather = new Weather("Москва");
+        List<WeatherSummary> weatherSummary = weather.getForDay();
 
-        for (int i = 0; i < weatherSummary.size(); i++) {
+        /**for (int i = 0; i < weatherSummary.size(); i++) {
             WeatherSummary summary = weatherSummary.get(i);
             System.out.println(summary.getDate());
             System.out.println(summary.getDateWeek());
@@ -24,7 +24,16 @@ import org.jsoup.select.Elements;
             System.out.println(summary.getClouds());
             System.out.println(summary.getWind() + " м/с");
             System.out.println();
-        }
+        }**/
+
+        for (int i = 0; i < weatherSummary.size(); i++) {
+             WeatherSummary summary = weatherSummary.get(i);
+             System.out.println(summary.getDate());
+             System.out.println(summary.getTemperature());
+             System.out.println(summary.getClouds());
+             System.out.println(summary.getWind() + " м/с");
+             System.out.println();
+         }
 
     }
 }

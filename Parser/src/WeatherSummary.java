@@ -4,12 +4,17 @@ public class WeatherSummary {
     private String temperature;
     private String clouds;
     private String wind;
-    private String pressure;
-    private String humidity;
 
     public WeatherSummary(String date, String dateWeek, String temperature, String clouds, String wind){
         this.date = date;
         this.dateWeek = dateWeek;
+        this.temperature = temperature;
+        this.clouds = clouds;
+        this.wind = wind;
+    }
+
+    public WeatherSummary(String date, String temperature, String clouds, String wind){
+        this.date = date;
         this.temperature = temperature;
         this.clouds = clouds;
         this.wind = wind;
@@ -25,14 +30,6 @@ public class WeatherSummary {
 
     public String getWind() {
         return wind;
-    }
-
-    public String getPressure() {
-        return pressure;
-    }
-
-    public String getHumidity() {
-        return humidity;
     }
 
     public String getDate() {

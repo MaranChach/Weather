@@ -11,8 +11,10 @@ import java.util.Map;
 
 public class Weather {
     private String url;
+    private String urlNow;
     private String urlWeekly;
     private Document document;
+    private Document documentNow;
     private Document documentWeekly;
     private Map<String, String> cities;
 
@@ -31,10 +33,12 @@ public class Weather {
             return;
         }
 
-        this.url = "https://www.gismeteo.ru" + cities.get(city) + "now/";
+        this.url = "https://www.gismeteo.ru" + cities.get(city);
+        this.urlNow = "https://www.gismeteo.ru" + cities.get(city) + "now/";
         this.urlWeekly = "https://www.gismeteo.ru" + cities.get(city) + "weekly/";
         try{
             this.document = Jsoup.connect(url).get();
+            this.documentNow = Jsoup.connect(urlNow).get();
             this.documentWeekly = Jsoup.connect(urlWeekly).get();
         }
         catch (Exception e){
@@ -45,9 +49,9 @@ public class Weather {
 
     public String getTemperature(){
         try{
-            Element elementWeather = this.document.selectFirst("body > section > div > section > div > a > div > div.tab-content");
+            Element elementWeather = this.documentNow.selectFirst("body > section > div > section > div > a > div > div.tab-content");
 
-            Element elementTemp = document.selectFirst("div > div > span.unit");
+            Element elementTemp = documentNow.selectFirst("div > div > span.unit");
             Element elementSign = elementTemp.selectFirst("span.sign");
             Element elementLower = elementTemp.selectFirst("span.lower");
 
@@ -63,7 +67,7 @@ public class Weather {
 
     public String getClouds(){
         try{
-            Element elementWeather = this.document.selectFirst("body > section > div > section > div > a");
+            Element elementWeather = this.documentNow.selectFirst("body > section > div > section > div > a");
 
             return elementWeather.attr("data-text");
         }
@@ -75,7 +79,7 @@ public class Weather {
 
     public String getWind(){
         try{
-            Element elementWeather = this.document.selectFirst("body > section > div > section > div > div > div.info-wrap");
+            Element elementWeather = this.documentNow.selectFirst("body > section > div > section > div > div > div.info-wrap");
 
             Element elementWind = elementWeather.selectFirst("div > div > div.unit_wind_m_s");
             Element elementWindMeasure = elementWind.selectFirst("div.item-measure");
@@ -91,7 +95,7 @@ public class Weather {
 
     public String getPressure(){
         try{
-            Element elementWeather = this.document.selectFirst("body > section > div > section > div > div > div.info-wrap");
+            Element elementWeather = this.documentNow.selectFirst("body > section > div > section > div > div > div.info-wrap");
 
             Element elementPressure = elementWeather.selectFirst("div > div > div.unit_pressure_mm_hg_atm");
 
@@ -106,7 +110,7 @@ public class Weather {
 
     public String getHumidity(){
         try{
-            Element elementWeather = document.selectFirst("body > section > div > section > div > div > div.info-wrap");
+            Element elementWeather = documentNow.selectFirst("body > section > div > section > div > div > div.info-wrap");
 
             Element elementPressure = elementWeather.selectFirst("div > div.humidity > div.item-value");
 
@@ -141,6 +145,32 @@ public class Weather {
             e.printStackTrace();
         }
         return weatherWeekly;
+    }
+
+    public List getForDay(){
+        List<WeatherSummary> weatherForDay = new LinkedList<>();
+        try{
+            Elements weatherBlock =
+                    document.select("body > section > div > section")
+                            .attr("data-column-place", "C1P3")
+                            .select("div.widget-weather > div.widget-columns-8 > div.widget-items");
+
+
+            Elements timeUpper = weatherBlock.select("div.widget-row-time > div.row-item");
+            Elements temp = weatherBlock.select("div > div > div > div > span.unit_temperature_c");
+            Elements clouds = weatherBlock.select("div > div > div.weather-icon");
+            Elements wind = weatherBlock.select("div > div > span.unit_wind_m_s");
+
+            for (int i = 0; i < timeUpper.size(); i++) {
+                weatherForDay.add(new WeatherSummary(timeUpper.get(i).text(), temp.get(i).ownText(), clouds.get(i).attr("data-text"), wind.get(i).ownText()));
+            }
+
+            return weatherForDay;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return weatherForDay;
     }
 
     public Map<String, String> getCities() throws IOException {
