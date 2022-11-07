@@ -258,7 +258,7 @@ public class HelloController {
     }
 
     public void onSearchClick(ActionEvent actionEvent) throws IOException {
-        String validFoundCity = ComboPoisk.getValue().toString().substring(0, 1).toUpperCase() + ComboPoisk.getValue().toString().substring(1);
+        String validFoundCity = ComboPoisk.getValue().toString().substring(0, 1).toUpperCase() + ComboPoisk.getValue().toString().substring(1).toLowerCase();
         System.out.println(validFoundCity);
         if (!weather.getCities().containsKey(validFoundCity)){
             errorMessage.setVisible(true);
