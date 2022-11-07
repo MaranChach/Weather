@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.weather.weatherprog.HelloController">
+   <children>
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
+            <ImageView fx:id="BackgroundImage" fitHeight="768.0" fitWidth="1369.0" pickOnBounds="true" style="-fx-opacity: 0.8;">
+               <image>
+                  <Image url="@Pictures/oblachnoBack.jpg" />
+               </image>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+               <children>
+                  <Pane prefHeight="92.0" prefWidth="1369.0">
+                     <children>
+                        <Label fx:id="Gorod" alignment="CENTER" layoutX="480.0" layoutY="20.0" prefHeight="53.0" prefWidth="410.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;" text="Владимир" textAlignment="CENTER">
+                           <font>
+                              <Font name="Kunstler Script" size="36.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="ComboPoisk" editable="true" layoutX="14.0" layoutY="27.0" prefHeight="39.0" prefWidth="278.0" promptText="Введите город" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;" />
+                        <Button fx:id="ButtonPoisk" layoutX="308.0" layoutY="27.0" mnemonicParsing="false" onAction="#onSearchClick" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;" text="Поиск">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="219.0" prefWidth="1369.0">
+                     <children>
+                        <StackPane alignment="TOP_CENTER" layoutX="410.0" layoutY="-6.0" prefHeight="227.0" prefWidth="550.0">
+                           <children>
+                              <Pane cache="true" prefHeight="200.0" prefWidth="515.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label fx:id="TepmNow" contentDisplay="TOP" layoutX="14.0" layoutY="18.0" prefHeight="174.0" prefWidth="140.0" text="+25" textAlignment="CENTER" textFill="#111010">
+                                       <font>
+                                          <Font size="64.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="ImgPogodaNow" fitHeight="85.0" fitWidth="85.0" layoutX="188.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                       <image>
+                                          <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="PogodaNow" alignment="TOP_CENTER" layoutX="132.0" layoutY="157.0" prefHeight="70.0" prefWidth="197.0" text="Солнечно" textAlignment="CENTER" textFill="#1e1e1e" wrapText="true">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="295.0" layoutY="60.0" prefHeight="27.0" prefWidth="100.0" text="Влажность:" textFill="#141414">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="295.0" layoutY="87.0" prefHeight="32.0" prefWidth="90.0" text="Давление:" textFill="#1b1b1b">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label layoutX="295.0" layoutY="114.0" prefHeight="32.0" prefWidth="55.0" text="Ветер:" textFill="#171717">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="Vlaga" layoutX="395.0" layoutY="60.0" prefHeight="27.0" prefWidth="56.0" text="80%" textFill="#141414">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="Davlenie" layoutX="385.0" layoutY="90.0" text="753 мм рт. ст." textFill="#1b1a1a">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="2.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="Veter" layoutX="356.0" layoutY="119.0" prefHeight="28.0" prefWidth="170.0" text="3 м/с СЗ" textAlignment="CENTER" textFill="#1e1e1e">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <padding>
+                                          <Insets left="2.0" top="1.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label layoutX="230.0" layoutY="10.0" text="Сегодня">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </StackPane>
+                        <Label fx:id="errorMessage" layoutX="18.0" layoutY="-11.0" prefHeight="39.0" prefWidth="278.0" text="Город не найден" textFill="#b90202" visible="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="217.0" prefWidth="1369.0">
+                     <children>
+                        <Pane layoutX="20.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time1" alignment="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="20:00" textAlignment="CENTER" textFill="#070707">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor1" alignment="CENTER" layoutY="45.0" prefWidth="100.0" text="+2" textFill="#1e1e1e">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda1" fitHeight="65.0" fitWidth="70.0" layoutX="100.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/Снег.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor1" alignment="CENTER" layoutX="1.0" layoutY="115.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="210.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time2" alignment="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor2" layoutY="45.0" prefWidth="90.0" text="+2">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda2" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor2" alignment="CENTER" layoutX="-1.0" layoutY="115.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="400.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time3" alignment="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor3" alignment="CENTER" layoutY="45.0" prefHeight="70.0" prefWidth="90.0" text="+25">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda3" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor3" alignment="CENTER" layoutX="3.0" layoutY="112.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="590.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time4" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="9:00">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor4" alignment="CENTER" layoutY="45.0" prefHeight="70.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda4" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor4" alignment="CENTER" layoutY="118.0" prefHeight="55.0" prefWidth="180.0" text="Пасмурно небольшой снег" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="780.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time5" alignment="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor5" alignment="CENTER" layoutY="45.0" prefHeight="70.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda5" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor5" alignment="CENTER" layoutX="-1.0" layoutY="115.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="970.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time6" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="18:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor6" alignment="CENTER" layoutY="48.0" prefHeight="70.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda6" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor6" alignment="CENTER" layoutX="1.0" layoutY="114.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="1160.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Time7" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="7.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempHor7" alignment="CENTER" layoutY="48.0" prefHeight="70.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogoda7" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaHor7" alignment="CENTER" layoutX="2.0" layoutY="118.0" prefHeight="63.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Pane prefHeight="227.0" prefWidth="1369.0">
+                     <children>
+                        <Pane layoutX="20.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day1" alignment="CENTER" layoutX="8.0" layoutY="14.0" prefHeight="27.0" prefWidth="170.0" text="02.11">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay1" alignment="CENTER" layoutY="45.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay1" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(2).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay1" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Пасмурно небольшой снег" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter1" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="210.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day2" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay2" alignment="CENTER" layoutY="45.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay2" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay2" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter2" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="400.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day3" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay3" alignment="CENTER" layoutY="45.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay3" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay3" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter3" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="590.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day4" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefHeight="27.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay4" alignment="CENTER" layoutY="48.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay4" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay4" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter4" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="780.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day5" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="14.0" prefWidth="170.0" text="9:00" textAlignment="CENTER" textFill="#0a0a0a">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay5" alignment="CENTER" layoutY="48.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay5" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay5" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter5" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="970.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day6" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay6" alignment="CENTER" layoutY="48.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay6" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay6" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter6" alignment="CENTER" layoutY="178.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="1160.0" prefHeight="210.0" prefWidth="180.0" style="-fx-background-color: D9D9D950; -fx-background-radius: 10;">
+                           <children>
+                              <Label fx:id="Day7" alignment="CENTER" layoutX="5.0" layoutY="14.0" prefWidth="170.0" text="9:00" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="TempDay7" alignment="CENTER" layoutY="48.0" prefWidth="90.0" text="+2" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="ImgPogodaDay7" fitHeight="65.0" fitWidth="70.0" layoutX="89.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Downloads/pngwing.com%20(1).png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="PogodaDay7" alignment="CENTER" layoutY="115.0" prefHeight="55.0" prefWidth="180.0" text="Солнечно" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="Veter7" alignment="CENTER" layoutY="175.0" prefWidth="180.0" text="3м/с СЗ" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</VBox>
